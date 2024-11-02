@@ -22,3 +22,16 @@
    ```
 
 This will set up the project with Django in a virtual environment.
+
+4. **When using Visual Studio Code**:
+   - Open a new terminal within VS Code.
+   - Run the command:
+     ```bash
+     pipenv shell  # Enter virtual environment
+     ```
+   - Then start the Django server with:
+     ```bash
+     python manage.py runserver
+     ```
+
+This will set up the project with Django in a virtual environment and start the development server.
