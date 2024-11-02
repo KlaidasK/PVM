@@ -38,4 +38,4 @@ This will set up the project with Django in a virtual environment.
 This will set up the project with Django in a virtual environment and start the development server.
 ### Technology Stack
 - Web Framework: Django
-- Database: PostgreSQL or SQLite
+- Database: SQLite3
