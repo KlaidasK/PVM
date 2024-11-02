@@ -38,4 +38,6 @@ This will set up the project with Django in a virtual environment.
 This will set up the project with Django in a virtual environment and start the development server.
 ### Technology Stack
 - Web Framework: Django
+- Front-end: HTML/CSS/JavaScript
+- Back-end: Python 3.13.0
 - Database: SQLite3
