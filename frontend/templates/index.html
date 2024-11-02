@@ -1,14 +1,103 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MakePro</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
 </head>
+
 <body>
-    <h1>HELLO WORLD</h1>
+    <nav>
+        <div><a href="index.html">makePro</a></div>
+        <ul>
+            <li class="login"><a href="login.html">Login</a></li>
+            <li><a href="">Register</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="landingwrapper">
+            <div class="main1wrapper">
+                <div class="frontview">
+                    <article>
+                        <h1>Welcome to MakePro - Your #1 hub for DIY Projects!</h1>
+                        <p>Unleash your creativity and join forces with passionate makers from around the world.
+                            Whether you're a seasoned pro or just starting your DIY journey, MakePro connects you
+                            with the perfect team to bring your projects to life.</p>
+                        <button><a href="">Start your journey!</a></button>
+                    </article>
+                    <div class="img1wrapper"><img src="{% static 'img/images.png' %}" alt="placeholder"></div>
+                </div>
+                <div class="statswrapper">
+                    <section>
+                        <h3>Active users:</h3>
+                        <p>10254</p>
+                    </section>
+                    <section>
+                        <h3>Ongoing projects:</h3>
+                        <p>632</p>
+                    </section>
+                    <section>
+                        <h3>Total DIY hours:</h3>
+                        <p>5004</p>
+                    </section>
+                </div>
+            </div>
+            <div class="main2wrapper">
+                <div><img src="{% static 'img/partnership.png' %}" alt="placeholder"></div>
+                <article>
+                    <section>
+                        <h2>Real-Time Collaboration</h2>
+                        <p>Work together seamlessly, share ideas, and track your
+                            progress all in one place. MakePro is designed to streamline
+                            your DIY experience and help you achieve your goals faster.</p>
+                    </section>
+                    <section>
+                        <h2>Get Recognized</h2>
+                        <p>Earn badges, show off your achievements, and
+                            let the world see your DIY journey. MakePro helps you
+                            showcase your skills and grow your reputation within the
+                            community.</p>
+                    </section>
+                </article>
+            </div>
+            <div class="main3wrapper">
+                <article>
+                    <section>
+                        <h2>
+                            <li>Find Your Perfect Team</li>
+                        </h2>
+                        <p>Search for teams based on your skills, interests,
+                            or project goals. Discover like-minded individuals ready to
+                            collaborate and create something amazing together.</p>
+                    </section>
+                    <section>
+                        <h2>
+                            <li>Create or Join a Project</li>
+                        </h2>
+                        <p>Have an idea for a project? Start your own team
+                            and bring your vision to reality. Already found your perfect
+                            project? Join existing teams, contribute your expertise, and build
+                            something incredible!</p>
+                    </section>
+                </article>
+                <div class="buttonwrapper"><button><a href="">Start now!</a></button></div>
+            </div>
+        </div>
+    </main>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
-<script src="{% static 'js/script.js' %}"></script>
+
 </html>

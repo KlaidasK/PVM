@@ -1,3 +1,249 @@
-h1 {
-    color: red;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+}
+body {
+    background-color: #3F3468;
+    font-family: 'Poppins', sans-serif;
+}
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+}
+nav div {
+    margin-left: 2%;
+}
+nav div a {
+    color: #DDB298;
+    font-weight: 1000;
+    font-size: 2rem;
+}
+nav li {
+    display: block;
+    float: right;
+    padding: 2rem 4rem;
+}
+nav li a {
+    color: white;
+}
+.login {
+    background-color: #DDB298;
+}
+.login a {
+    color: black;
+}
+nav li:hover {
+    background-color: black;
+}
+nav li:hover a {
+    color: white;
+}
+
+
+
+main {
+    margin-top: 6rem;
+}
+.landingwrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.main1wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+
+.frontview {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    gap: 2rem; /* Add space between the image and article */
+}
+
+.frontview .img1wrapper {
+    flex: 1; /* Allow image wrapper to grow and share space */
+    min-width: 300px; /* Ensures img1wrapper doesn’t shrink too small */
+    display: flex;
+    justify-content: center; /* Center the image inside img1wrapper */
+}
+
+.frontview .img1wrapper img {
+    width: 100%;
+    max-width: 500px; /* Set a maximum width for the image */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Crop if needed to fit the wrapper */
+}
+
+.frontview article {
+    flex: 1; /* Allow article to grow and share space */
+    max-width: 100%;
+    padding: 10px 20px;
+    min-width: 300px; /* Ensures article doesn’t shrink too small */
+}
+
+/* Responsive Stacking */
+@media (max-width: 768px) {
+    .frontview {
+        flex-direction: column; /* Stack image and article vertically */
+        align-items: center; /* Center-align when stacked */
+    }
+
+    .frontview .img1wrapper, .frontview article {
+        min-width: auto; /* Remove min-width constraint on smaller screens */
+        width: 100%; /* Allow each to take full width */
+        padding: 5%; /* Adjust padding for better fit */
+    }
+}
+
+.frontview article h1 {
+    color: #DDB298;
+    font-weight: bold;
+}
+.frontview article p {
+    margin-top: 2rem;
+    color: white;
+}
+.frontview article button {
+    background-color: #F14242;
+    padding: 15px 20px;
+    margin-top: 2rem;
+    border-radius: 1rem;
+}
+.frontview article button a {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.statswrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 30px;
+    gap: 25%;
+}
+.statswrapper h3 {
+    color: white;
+    font-weight: 400;
+}
+.statswrapper section p {
+    color: #B5C99A;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+
+.main2wrapper {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: #DDB298;
+}   
+
+.main2wrapper div {
+    flex: 1; /* Allow div to take up available space */
+    padding: 2%; /* Adjust padding for better fit */
+    min-width: 300px; /* Ensures div doesn’t shrink too small */
+}
+
+.main2wrapper div img {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    height: auto;
+    max-width: 100%;
+    width: 700px;
+    transform: rotate(2deg); /* Slight clockwise rotation */
+}
+
+.main2wrapper article {
+    flex: 1; /* Allow article to take up available space */
+    max-width: 100%;
+    padding: 10px 20px;
+    min-width: 300px; /* Ensures article doesn’t shrink too small */
+}
+
+.main2wrapper article section {
+    margin-top: 2rem;
+}
+
+/* Responsive Stacking */
+@media (max-width: 768px) {
+    .main2wrapper {
+        flex-direction: column; /* Stack div and article vertically on smaller screens */
+        align-items: center; /* Center-align items when stacked */
+    }
+
+    .main2wrapper div, .main2wrapper article {
+        min-width: auto; /* Remove min-width constraint on smaller screens */
+        width: 100%; /* Allow each to take full width */
+        padding: 5%; /* Adjust padding for better fit */
+    }
+}
+
+
+.main2wrapper article h2{
+    color: #3F3468;
+    font-weight: 400;
+    letter-spacing: 3px;
+    font-size: 2rem;
+}
+.main2wrapper article p {
+    margin-top: 0;
+    color: #3F3468;
+    font-size: 1.3rem;
+    word-spacing: 0.5rem;
+}
+
+.main3wrapper {    
+    background-color: #B5C99A;
+    width: 100%;
+    heigth: 100%;
+}
+.main3wrapper article {
+    max-width: 100%; /* Ensure it doesn’t exceed parent width */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Optional: Adds padding inside article */
+    color: #3F3468;
+}
+.main3wrapper article section {
+    padding: 5%;
+    font-size: 1.5rem;
+}
+.main3wrapper .buttonwrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.main3wrapper button {
+    background-color: #F14242;
+    padding: 1% 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-radius: 1rem;
+    border: none;
+}
+.main3wrapper button a {
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
 }
