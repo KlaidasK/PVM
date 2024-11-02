@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+
+<body>
+    <nav>
+        <div><a href="{% url 'index' %}">makePro</a></div>
+    </nav>
+
+    <main>
+        <form action="" method="POST">
+            <h2>Want to be a part of our team?</h2>
+            <div class="container">
+                <div>
+                    <label for="uname">This is how others will see you.</label>
+                    <input type="text" placeholder="Username" name="uname">
+                </div>
+
+                <div>
+                    <label for="pword">Make sure this is secure!</label>
+                    <input type="text" placeholder="Password" name="pword">
+                    <input type="text" placeholder="Re-enter your password" name="pword2">
+                </div>
+
+                <div>
+                    <label for="email">A verification link will be sent to this email.</label>
+                    <input type="text" placeholder="E-mail address" name="email">
+                </div>
+
+                <div class="checkboxes">
+                    <div>
+                        <input type="checkbox" name="terms" required>
+                        <label for="terms">I agree to the terms of our privacy policy.</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="notifs">
+                        <label for="notifs">I wish to receive notifications through my email.</label>
+                    </div>
+                </div>
+                <div class="loginlink"><a href="{% url 'login' %}">Already have an account? Sign in here.</a></div>
+                <button type="submit"><a href="">Sign up!</a></button>
+            </div>
+
+        </form>
+    </main>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+form{
+    margin-left: 5%;
+}
+form h2 {
+    color: #DDB298;
+    font-weight: 400; /* Regular weight */
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 2%;
+}
+form, .container {
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    max-width: 30%;
+}
+.container div {
+    margin-bottom: 5%;
+}
+label {
+    color: white;
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin-left: 1%;
+}
+input {
+    padding: 3% 5%;
+    margin-top: 1%;
+    background-color: #D9D9D9;
+    width: 80%;
+    border: none;
+    margin-bottom: 2%;
+}
+input::placeholder {
+    color: #6A576D;
+    opacity: 0.69;
+}
+
+.checkboxes {
+    display: flex;
+    flex-direction: column;
+}
+.checkboxes div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.checkboxes div label {
+    max-width: 50%;
+    font-size: 0.7vw;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+input[type="checkbox"] {
+    width: 20px; /* Set to your desired size */
+    height: 20px;
+    border: none;
+}
+
+form button {
+    background-color: #F14242;
+    padding: 15px 20px;
+    margin-top: 2rem;
+    max-width: 40%;
+    border-radius: 0.5rem;
+    border: none;
+}
+form button a {
+    color: white;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.regform {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+}
+.regform button {
+    margin: 0;
+    background-color: #DDB298;
+}
+.regform button a {
+    color: #3F3468;
+    width: 100%;
+}
+
+.loginlink a {
+    color: white;
+    text-decoration: underline;
+    font-size: 13px;
+    opacity: 0.9;
+}
+.loginlink a:hover {
+    color: black;
+}

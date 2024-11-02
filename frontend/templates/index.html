@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MakePro</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +21,10 @@
 
 <body>
     <nav>
-        <div><a href="index.html">makePro</a></div>
+        <div><a href="">makePro</a></div>
         <ul>
-            <li class="login"><a href="login.html">Login</a></li>
-            <li><a href="">Register</a></li>
+            <li class="login"><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'register' %}">Register</a></li>
         </ul>
     </nav>
 
@@ -36,7 +37,7 @@
                         <p>Unleash your creativity and join forces with passionate makers from around the world.
                             Whether you're a seasoned pro or just starting your DIY journey, MakePro connects you
                             with the perfect team to bring your projects to life.</p>
-                        <button><a href="">Start your journey!</a></button>
+                        <button><a href="{% url 'register' %}">Start your journey!</a></button>
                     </article>
                     <div class="img1wrapper"><img src="{% static 'img/images.png' %}" alt="placeholder"></div>
                 </div>
@@ -93,7 +94,7 @@
                             something incredible!</p>
                     </section>
                 </article>
-                <div class="buttonwrapper"><button><a href="">Start now!</a></button></div>
+                <div class="buttonwrapper"><button><a href="{% url 'register' %}">Start now!</a></button></div>
             </div>
         </div>
     </main>
