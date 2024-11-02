@@ -1,4 +1,4 @@
-# Python 3.13.0 Version Setup
+# Setup
 
 ### Required:
 - Python 3.13.0 must be installed on your computer. You can download it from the official Python website.
@@ -29,9 +29,13 @@ This will set up the project with Django in a virtual environment.
      ```bash
      pipenv shell  # Enter virtual environment
      ```
+     
    - Then start the Django server with:
      ```bash
      python manage.py runserver
      ```
 
 This will set up the project with Django in a virtual environment and start the development server.
+### Technology Stack
+- Web Framework: Django
+- Database: PostgreSQL or SQLite
