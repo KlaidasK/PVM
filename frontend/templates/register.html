@@ -16,7 +16,8 @@
     </nav>
 
     <main>
-        <form action="" method="POST">
+        <form action="{% url 'register_user' %}" method="POST">
+            {% csrf_token %}
             <h2>Want to be a part of our team?</h2>
             <div class="container">
                 <div>
@@ -47,7 +48,7 @@
                     </div>
                 </div>
                 <div class="loginlink"><a href="{% url 'login' %}">Already have an account? Sign in here.</a></div>
-                <button type="submit"><a href="">Sign up!</a></button>
+                <button type="submit">Sign up!</button>
             </div>
 
         </form>

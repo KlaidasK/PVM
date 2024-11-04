@@ -72,8 +72,7 @@ form button {
     max-width: 40%;
     border-radius: 0.5rem;
     border: none;
-}
-form button a {
+    text-color: white;
     color: white;
     font-weight: 400;
     font-size: 16px;
