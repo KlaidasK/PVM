@@ -15,23 +15,8 @@ function performSearch(event) {
 function displaySearchResults(query) {
     const resultsContainer = document.querySelector('.results-container');
     
-    // Placeholder content to simulate search results
-    resultsContainer.innerHTML = `
-        <p>Displaying results for "${query}":</p>
-        <div class="card">
-            <div class="card-header">
-                <p>Looking for: Developer</p>
-                <p class="title"><span>Web Development Team</span></p>
-            </div>
-            <div class="card-content">
-                <p>Team activity: Moderate</p>
-                <p>Members: 8</p>
-                <div class="activity-dots">
-                    <span></span><span></span><span></span>
-                </div>
-                <div class="arrow">&gt;</div>
-            </div>
-        </div>
+    // Define the card template
+    const cardTemplate = `
         <div class="card">
             <div class="card-header">
                 <p>Looking for: Designer</p>
@@ -47,4 +32,19 @@ function displaySearchResults(query) {
             </div>
         </div>
     `;
+
+    // Set up a variable to hold the generated HTML
+    let cardsHTML = `<div class="querywrapper"><p>Displaying results for: ${query}</p></div><div class="cardgrid">`;
+
+    // Generate X amount of cards (for example, 8 cards)
+    const numberOfCards = 30;
+    for (let i = 0; i < numberOfCards; i++) {
+        cardsHTML += cardTemplate;
+    }
+
+    // Close the card grid container
+    cardsHTML += `</div>`;
+
+    // Set the generated HTML inside the results container
+    resultsContainer.innerHTML = cardsHTML;
 }
