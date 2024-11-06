@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find a team!</title>
+    <title>MakePro</title>
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/teams.css' %}">
 
@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/view.css' %}">
 
 </head>
 
@@ -92,9 +93,85 @@
         </section>
         <section class="postsearch hidden">
             <div class="results-container">
-                
+
             </div>
         </section>
+
+
+        <section class="teamview">
+            <div class="card-container hidden">
+                <div class="view-header">
+                    <div class="header-top">
+                        <div class="spec-wrapper">
+                            <p>Looking for: engineer</p>
+                        </div>
+                        <div class="activity-wrapper">
+                            <p>Team activity: Very high</p>
+                        </div>
+                    </div>
+                    <div class="header-title">
+                        <p>Wood carving automation</p>
+                    </div>
+                </div>
+                <div class="view-body">
+                    <div class="team-description">
+                        <p>Team description:</p>
+                    </div>
+                    <div class="desc-body-wrapper">
+                        <div class="desc-body">
+                            <p>The Wood Carving Automation team is focused on revolutionizing traditional wood carving
+                                methods
+                                by integrating modern automation technologies. Our goal is to create a smart,
+                                programmable system that can
+                                craft intricate designs on wood surfaces with precision and efficiency. By leveraging
+                                robotic arms, CNC (Computer Numerical
+                                Control) systems, and advanced software algorithms, we aim to streamline the process of
+                                wood carving, making it more accessible
+                                and less labor-intensive for artisans and manufacturers alike. This project will explore
+                                various automation techniques while
+                                maintaining the authenticity of handcrafted designs, offering a perfect blend of
+                                artistry and technology. We're looking for
+                                innovative thinkers and engineers who can push the boundaries of traditional
+                                craftsmanship through cutting-edge automation
+                                solutions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-static">
+                    <div class="members">
+                        <div class="wrap">
+                            <p>Team members:</p>
+                        </div>
+                        <div class="container">
+                            <p>Jimmy</p>
+                            <p>Timmy</p>
+                            <p>Kinny</p>
+                        </div>
+                    </div>
+                    <div class="requirements">
+                        <div class="wrap">
+                            <p>Requirements to join:</p>
+                        </div>
+                        <div class="container">
+                            <p>None Listed/</p>
+                        </div>
+                    </div>
+                    <div class="tags">
+                        <div class="wrap">
+                            <p>Tags:</p>
+                        </div>
+                        <div class="container">
+                            <p>Wood, automation, woodworking.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-wrapper">
+                    <button>Request to join</button>
+                </div>
+            </div>
+        </section>
+
+
     </main>
     <script src="{% static 'js/script.js' %}"></script>
 </body>
