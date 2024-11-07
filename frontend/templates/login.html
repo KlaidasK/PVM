@@ -12,7 +12,21 @@
 
 <body>
     <nav>
-        <div><a href="{% url 'index' %}">makePro</a></div>
+        {% with mock_authenticated=False %}
+            {% if mock_authenticated %}
+            <div><a href="{% url 'index' %}">makePro</a></div>
+            <ul>
+                <li><a href="{% url 'teamsearch' %}">Search for team</a></li>
+                <li><a href="">Manage teams</a></li>
+            </ul>
+            {% else %}
+            <div><a href="{% url 'index' %}">makePro</a></div>
+            <ul>
+                <li class="login"><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+            </ul>
+            {% endif %}
+        {% endwith %}
     </nav>
 
     <main>

@@ -21,11 +21,11 @@
 
 <body>
     <nav>
-        {% with mock_authenticated=False %}
+        {% with mock_authenticated=True %}
             {% if mock_authenticated %}
             <div><a href="{% url 'index' %}">makePro</a></div>
             <ul>
-                <li><a href="">Search for team</a></li>
+                <li><a href="{% url 'teamsearch' %}">Search for team</a></li>
                 <li><a href="">Manage teams</a></li>
             </ul>
             {% else %}

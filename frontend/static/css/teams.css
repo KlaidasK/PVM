@@ -1,0 +1,164 @@
+.search-container {
+    float: left;
+    padding-left: 5%;
+    width: 100%;
+  }
+  
+input[type=text] {
+    padding: 20px 100px;
+    margin-top: 8px;
+    font-size: 20px;
+    border: none;
+    border-radius: 59px;
+    background-color: #372D5E;
+    color: white;
+  }
+  
+.search-container button {
+    padding: 20px 30px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #DDB298;
+    font-size: 17px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+input[type=checkbox] {
+    transform: scale(1.5); /* Adjust the scale factor to increase size */
+    margin: 10px; /* Optional: add some margin for better spacing */
+}
+.filter {
+    color: white;
+    letter-spacing: 1px;
+}
+
+.teams-container {
+    
+    max-height: 100%;
+}
+.head {
+    display: flex;
+    padding: 1px;
+    color: white;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2%;
+    max-height: 100%;
+}
+/* Card container */
+.card {
+    width: 300px;
+    height: 350px;
+    padding: 20px;
+    background-color: #ddd;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: #3b3067; /* Text color */
+}
+
+/* Header section with the tilted red shape */
+.card-header {
+    background-color: #d4b6b0;
+    padding: 20px;
+    padding-bottom: 70px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    max-height: 230px;
+}
+
+.card-header p {
+    font-size: 14px;
+    color: #3b3067;
+    margin: 0;
+}
+.title {
+    padding-top: 10%;
+}
+.title span {
+    font-size: 30px;
+    letter-spacing: 1px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3; /* Limits to 3 lines and adds ellipsis */
+    max-width: 100%;
+}
+
+.card-header h2 {
+    font-size: 18px;
+    margin: 50px 0 0;
+    color: #3b3067;
+}
+
+/* Card content */
+.card-content {
+    position: relative;
+}
+
+/* Activity dots */
+.activity-dots {
+    display: flex;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.activity-dots span {
+    width: 10px;
+    height: 10px;
+    background-color: #b9d78b; /* Light green color */
+    border-radius: 50%;
+}
+
+/* Arrow */
+.arrow {
+    font-size: 20px;
+    color: #3b3067; /* Dark purple color */
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.postsearch {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 20px 0;
+    height: auto;
+}
+
+.querywrapper {
+    width: 100%;
+    display: flex;
+    color: white;
+    padding: 20px;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.results-container {
+    width: 100%;
+    heigth: auto;
+}
+
+.cardgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust 200px to control minimum width */
+    gap: 15px; /* Space between cards */
+    width: 100%;
+    justify-items: center;
+}
+

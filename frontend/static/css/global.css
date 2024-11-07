@@ -51,3 +51,7 @@ nav li:hover a {
 main {
     margin-top: 6rem;
 }
+
+.hidden {
+    display: none;
+}
