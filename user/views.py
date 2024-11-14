@@ -1,25 +1,33 @@
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
+# Registration view
+def register_view(request):
+    if request.method =='POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            login(request, form.save())
+            return redirect("frontend:index")
+    else:
+        form = UserCreationForm()
+    return render(request, "register.html", { "form": form })
 
-@require_POST  # Ensures the view only responds to POST requests
-def register_user(request):
-    username = request.POST.get("uname")
-    password = request.POST.get("pword")
-    
-    # Log data for debugging
-    print("Username:", username)
-    print("Password:", password)
-    
-    # Respond with a simple JSON message to confirm connection
-    return JsonResponse({"success": True, "message": "Data received successfully!"})
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data = request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect("frontend:index")
+    else:
+        form = AuthenticationForm()
+    return render(request, "login.html", { "form": form })
 
-def login_user(request):
-    username = request.POST.get("uname")
-    password = request.POST.get("pword")
-    
-    # Log data for debugging
-    print("Username:", username)
-    print("Password:", password)
-    
-    # Respond with a simple JSON message to confirm connection
-    return JsonResponse({"success": True, "message": "Data received successfully!"})
+def logout_view(request):
+    if request.method=="POST":
+        logout(request)
+        return redirect("frontend:index")
+        
+@login_required(login_url="/user/login/")
+def profile_view(request):
+    return render(request, "profile.html")

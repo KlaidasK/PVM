@@ -1,0 +1,14 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+<link rel="stylesheet" href="{% static 'css/global.css' %}">
+
+{% block content %}
+<main>
+    <form class="form-with-validation" action="/user/register/" method="post">
+        <div class="header-wrapper"><p>Register</p></div>
+        {% csrf_token %}
+        {{ form }}
+        <button>Submit</button>
+    </form>
+</main>
+{% endblock %}

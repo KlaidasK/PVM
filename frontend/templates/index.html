@@ -21,21 +21,26 @@
 
 <body>
     <nav>
-        {% with mock_authenticated=True %}
-            {% if mock_authenticated %}
-            <div><a href="{% url 'index' %}">makePro</a></div>
+            {% if user.is_authenticated %}
+            <div><a href="{% url 'frontend:index' %}">makePro</a></div>
             <ul>
-                <li><a href="{% url 'teamsearch' %}">Search for team</a></li>
+                <li class='logout'>
+                    <form action="{% url 'user:logout' %}" method="post">
+                      {% csrf_token %}
+                      <button>Logout</button>
+                    </form>
+                </li>
+                <li><a href="{% url 'frontend:teamsearch' %}">Search for team</a></li>
                 <li><a href="">Manage teams</a></li>
+                
             </ul>
             {% else %}
-            <div><a href="{% url 'index' %}">makePro</a></div>
+            <div><a href="{% url 'frontend:index' %}">makePro</a></div>
             <ul>
-                <li class="login"><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
+                <li class="login"><a href="{% url 'user:login' %}">Login</a></li>
+                <li><a href="{% url 'user:register' %}">Register</a></li>
             </ul>
             {% endif %}
-        {% endwith %}
     </nav>
 
     <main>
@@ -47,7 +52,9 @@
                         <p>Unleash your creativity and join forces with passionate makers from around the world.
                             Whether you're a seasoned pro or just starting your DIY journey, MakePro connects you
                             with the perfect team to bring your projects to life.</p>
-                        <button><a href="{% url 'register' %}">Start your journey!</a></button>
+                        {% if not user.is_authenticated %}
+                        <button><a href="{% url 'user:register' %}">Start your journey!</a></button>
+                        {% endif %}
                     </article>
                     <div class="img1wrapper"><img src="{% static 'img/images.png' %}" alt="placeholder"></div>
                 </div>
@@ -104,7 +111,10 @@
                             something incredible!</p>
                     </section>
                 </article>
-                <div class="buttonwrapper"><button><a href="{% url 'register' %}">Start now!</a></button></div>
+                <div class="buttonwrapper">
+                    {% if not user.is_authenticated %}
+                    <button><a href="{% url 'user:register' %}">Start now!</a></button></div>
+                    {% endif %}
             </div>
         </div>
     </main>

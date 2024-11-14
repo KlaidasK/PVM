@@ -45,6 +45,15 @@ nav li:hover {
 nav li:hover a {
     color: white;
 }
+.logout:hover {
+    background: #743014;
+}
+.logout button {
+    background: none;
+    border: none;
+    font: inherit;
+    color: white;
+}
 
 
 
