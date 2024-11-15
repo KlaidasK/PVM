@@ -3,12 +3,84 @@
 <link rel="stylesheet" href="{% static 'css/global.css' %}">
 
 {% block content %}
+<nav>
+    {% if user.is_authenticated %}
+    <div><a href="{% url 'frontend:index' %}">makePro</a></div>
+    <ul>
+        <li>
+            <form action="{% url 'user:logout' %}" method="post">
+              {% csrf_token %}
+              <button>Logout</button>
+            </form>
+        </li>
+        <li><a href="{% url 'frontend:teamsearch' %}">Search for team</a></li>
+        <li><a href="">Manage teams</a></li>
+    </ul>
+    {% else %}
+    <div><a href="{% url 'frontend:index' %}">makePro</a></div>
+    <ul>
+        <li class="login"><a href="{% url 'user:login' %}">Login</a></li>
+        <li><a href="{% url 'user:register' %}">Register</a></li>
+    </ul>
+    {% endif %}
+</nav>
+
 <main>
-    <form class="form-with-validation" action="/user/register/" method="post">
-        <div class="header-wrapper"><p>Register</p></div>
-        {% csrf_token %}
-        {{ form }}
-        <button>Submit</button>
+    <!-- Display form-wide errors if there are any -->
+    {% if form.non_field_errors %}
+    <div class="form-errors">
+        {% for error in form.non_field_errors %}
+            <p class="error">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" action='/user/register/'>
+    {% csrf_token %}
+        <div class="form-grid">
+            <span>Sign up</span>
+
+            <!-- Username Field -->
+            <div class="form-item">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="field-errors">
+                        {% for error in form.username.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-item">
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+                {{ form.password1 }}
+                {% if form.password1.errors %}
+                    <div class="field-errors">
+                        {% for error in form.password1.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-item">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="field-errors">
+                        {% for error in form.password2.errors %}
+                            <p class="error">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <button type="submit">Register</button>
+        </div>
     </form>
 </main>
 {% endblock %}

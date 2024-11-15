@@ -3,3 +3,68 @@
     padding: 0;
     box-sizing: border-box;
 }
+body {
+    color: white;
+}
+form { 
+    padding: 20px;
+}
+form input {
+    padding: 10px;
+}
+form label {
+    padding: 10px;
+}
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    width: 90%; /* Set the width relative to the viewport */
+    max-width: 500px; /* Set a maximum width to prevent it from stretching too much */
+    margin: auto; /* Center the form */
+}
+.form-grid span {
+    font-size: 40px;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+.form-grid > * {
+    padding: 20px;
+}
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+form button {
+    padding: 10px 20px;  /* Adjust padding to make the button size flexible */
+    font-size: 1em;      /* Ensure font-size scales well */
+    width: auto;         /* Allow the button width to be based on content */
+    max-width: 100%;     /* Prevent the button from growing too wide */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;  /* Optional: Rounded corners for a smoother look */
+    background-color: #F6724B;  /* Button background color */
+    color: white;        /* Button text color */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+    letter-spacing: 1px;
+}
+
+form button:hover {
+    background-color: #223C63;  /* Darker shade on hover */
+}
+
+/* Make the button take full width on smaller screens */
+@media (max-width: 600px) {
+    form button {
+        width: 100%;      /* Full width on small screens */
+    }
+}
+
+.error {
+    color: red;
+    padding: 3px;
+    font-size: 17px;
+}
+.error::before {
+    content: "⛔";
+}
