@@ -22,70 +22,9 @@
 </head>
 
 <body>
-    {% include 'include/navbar.html' %}
+   {% include 'include/navbar.html' %}
     <main>
-        <div class="search-container">
-            <form onsubmit="performSearch(event)" autocomplete="off">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-                <input type="checkbox" name="filter">
-                <label for="filter" class="filter">Filter by team activity</label>
-            </form>
-        </div>
-        <section class="presearch">
-            <div class="teams-container">
-                <div class="head">
-                    <p>Recommended Teams:</p>
-                </div>
-                <div class="carousel">
-                    <div class="card">
-                        <div class="card-header">
-                            <p>Looking for: engineer</p>
-                            <p class="title"><span>AI integration into car driving systems</span></p>
-                        </div>
-                        <div class="card-content">
-                            <p>Team activity: Very high</p>
-                            <p>Members: 15</p>
-                            <div class="activity-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <div class="arrow">&gt;</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <p>Looking for: engineer</p>
-                            <p class="title"><span>AI integration into car driving systems</span></p>
-                        </div>
-                        <div class="card-content">
-                            <p>Team activity: Very high</p>
-                            <p>Members: 15</p>
-                            <div class="activity-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <div class="arrow">&gt;</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <p>Looking for: engineer</p>
-                            <p class="title"><span>AI integration into car driving systems and more text for testing :DD
-                                    asdasdasdasdasdfffffD</span></p>
-                        </div>
-                        <div class="card-content">
-                            <p>Team activity: Very high</p>
-                            <p>Members: 15</p>
-                            <div class="activity-dots">
-                                <span></span><span></span><span></span>
-                            </div>
-                            <div class="arrow">&gt;</div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        <section class="postsearch hidden">
+        <section class="postsearch">
             <div class="results-container">
 
             </div>
