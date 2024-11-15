@@ -5,4 +5,5 @@ app_name='frontend'
 urlpatterns = [
     path("", views.index, name="index"),
     path("teamsearch/", views.teamsearch, name="teamsearch"),
+    path("teammanage/", views.teammanage, name='teammanage'),
 ]

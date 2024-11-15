@@ -6,3 +6,6 @@ def index(request):
 
 def teamsearch(request):
     return render(request, 'teamsearch.html')
+
+def teammanage(request):
+    return render(request, "teammanage.html")
