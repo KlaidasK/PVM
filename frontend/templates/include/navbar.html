@@ -1,0 +1,22 @@
+<nav>
+    {% if user.is_authenticated %}
+    <div><a href="{% url 'frontend:index' %}">makePro</a></div>
+    <ul>
+        <li class='logout'>
+            <form action="{% url 'user:logout' %}" method="post">
+              {% csrf_token %}
+              <button>Logout</button>
+            </form>
+        </li>
+        <li><a href="{% url 'frontend:teamsearch' %}">Search for team</a></li>
+        <li><a href="{% url 'frontend:teammanage' %}">Manage teams</a></li>
+        
+    </ul>
+    {% else %}
+    <div><a href="{% url 'frontend:index' %}">makePro</a></div>
+    <ul>
+        <li class="login"><a href="{% url 'user:login' %}">Login</a></li>
+        <li><a href="{% url 'user:register' %}">Register</a></li>
+    </ul>
+    {% endif %}
+</nav>
