@@ -33,4 +33,5 @@ def logout_view(request):
         
 @login_required(login_url="/user/login/")
 def profile_view(request):
-    return render(request, "profile.html")
+    user_profile = UserProfile.objects.get(user=request.user)
+    return render(request, "profile.html", {"user_profile": user_profile})

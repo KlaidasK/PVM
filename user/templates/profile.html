@@ -3,3 +3,7 @@
 <link rel="stylesheet" href="{% static 'css/global.css' %}">
 
 {% include 'include/navbar.html' %}
+{% block content %}
+<p>Name: {{ user_profile.user.username }} </p>
+<p>Bio: {{ user_profile.bio }} </p>
+{% endblock %}
