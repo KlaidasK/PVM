@@ -3,7 +3,35 @@
 <link rel="stylesheet" href="{% static 'css/global.css' %}">
 
 {% include 'include/navbar.html' %}
+
 {% block content %}
-<p>Name: {{ user_profile.user.username }} </p>
-<p>Bio: {{ user_profile.bio }} </p>
+<!-- Profile Edit Form -->
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="edit_profile">
+    
+    <h2>Edit Profile</h2>
+
+    <!-- User Form (for username, email, etc.) -->
+    <div class="user-form">
+        <h3>Account Information</h3>
+        {{ user_form.as_p }} <!-- Render the user form fields -->
+    </div>
+
+    <!-- Profile Form (for bio, profile picture, etc.) -->
+    <div class="profile-form">
+        <h3>Profile Information</h3>
+        {{ profile_form.as_p }} <!-- Render the profile form fields -->
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Save Changes</button>
+</form>
+
+<!-- Delete Profile Button -->
+<form action="{% url 'user:delete_profile' %}" method="post" style="margin-top: 20px;">
+    {% csrf_token %}
+    <input type="hidden" name="form_type" value="delete_profile">
+    <button type="submit" class="delete-button" style="color: red;">Delete Profile</button>
+</form>
 {% endblock %}
