@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
-# Registration view
+from .models import UserProfile
+
 def register_view(request):
     if request.method =='POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            login(request, form.save())
+            user = form.save()
+            UserProfile.objects.create(user=user)
+            login(request, user)
             return redirect("frontend:index")
     else:
         form = UserCreationForm()
