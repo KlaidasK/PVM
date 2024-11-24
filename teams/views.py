@@ -3,9 +3,20 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import TeamForm #Itraukiamas is forms failo TeamForm klase
 from .models import Team  # Ensure you have the correct import for your Team model
+
 # Create your views here.
 def teamsearch(request):
-    return render(request, 'teamsearch.html')
+    # Get the search query from the request
+    search_query = request.GET.get('search', '')
+    
+    # Query the teams, filtering by name if a search query is provided
+    teams = Team.objects.all()
+    
+    if search_query:
+        teams = teams.filter(name__icontains=search_query)  # Case-insensitive search by name
+
+    # Pass the filtered teams to the template
+    return render(request, 'teamsearch.html', {'teams': teams, 'search_query': search_query})
 
 def teammanage(request):
     teams = Team.objects.all()  # Get all teams from the database

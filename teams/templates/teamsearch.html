@@ -8,165 +8,74 @@
     <title>MakePro</title>
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/teams.css' %}">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'css/view.css' %}">
-
 </head>
 
 <body>
     {% include 'include/navbar.html' %}
+
     <main>
         <div class="search-container">
-            <form onsubmit="performSearch(event)" autocomplete="off">
-                <input type="text" placeholder="Search.." name="search">
+            <form method="get" autocomplete="off">
+                <!-- The value for the input field should be the current search query -->
+                <input type="text" placeholder="Search.." name="search" value="{{ search_query }}">
                 <button type="submit"><i class="fa fa-search"></i></button>
-                <input type="checkbox" name="filter">
+                <input type="checkbox" name="filter" id="filter">
                 <label for="filter" class="filter">Filter by team activity</label>
             </form>
         </div>
+
         <section class="presearch">
             <div class="teams-container">
                 <div class="head">
                     <p>Recommended Teams:</p>
                 </div>
                 <div class="carousel">
+                    {% for team in teams %}
                     <div class="card">
                         <div class="card-header">
-                            <p>Looking for: engineer</p>
-                            <p class="title"><span>AI integration into car driving systems</span></p>
+                            <p>Looking for: {{ team.looking_for|default:"Not specified" }}</p>
+                            <p class="title"><span>{{ team.name }}</span></p>
                         </div>
                         <div class="card-content">
-                            <p>Team activity: Very high</p>
-                            <p>Members: 15</p>
                             <div class="activity-dots">
-                                <span></span><span></span><span></span>
+                                {% for _ in team.members.all %}
+                                    <span></span>
+                                {% endfor %}
                             </div>
                             <div class="arrow">&gt;</div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <p>Looking for: engineer</p>
-                            <p class="title"><span>AI integration into car driving systems</span></p>
-                        </div>
-                        <div class="card-content">
-                            <p>Team activity: Very high</p>
-                            <p>Members: 15</p>
-                            <div class="activity-dots">
-                                <span></span><span></span><span></span>
+                        <div class="card-footer">
+                            <div class="description">
+                                <p>Description:</p>
+                                <p>{{ team.description }}</p>
                             </div>
-                            <div class="arrow">&gt;</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <p>Looking for: engineer</p>
-                            <p class="title"><span>AI integration into car driving systems and more text for testing :DD
-                                    asdasdasdasdasdfffffD</span></p>
-                        </div>
-                        <div class="card-content">
-                            <p>Team activity: Very high</p>
-                            <p>Members: 15</p>
-                            <div class="activity-dots">
-                                <span></span><span></span><span></span>
+                            <div class="requirements">
+                                <p>Requirements to join:</p>
+                                <p>{{ team.requirements|default:"None Listed" }}</p>
                             </div>
-                            <div class="arrow">&gt;</div>
+                            <div class="tags">
+                                <p>Keyword:</p>
+                                <p>{{ team.keyword }}</p>
+                            </div>
                         </div>
                     </div>
-
+                    {% empty %}
+                        <p>No teams found for "{{ search_query }}"</p>
+                    {% endfor %}
                 </div>
             </div>
         </section>
+
         <section class="postsearch hidden">
             <div class="results-container">
-
+                <!-- Additional search results will be displayed here -->
             </div>
         </section>
-
-
-        <section class="teamview">
-            <div class="card-container hidden">
-                <div class="view-header">
-                    <div class="header-top">
-                        <div class="spec-wrapper">
-                            <p>Looking for: engineer</p>
-                        </div>
-                        <div class="activity-wrapper">
-                            <p>Team activity: Very high</p>
-                        </div>
-                    </div>
-                    <div class="header-title">
-                        <p>Wood carving automation</p>
-                    </div>
-                </div>
-                <div class="view-body">
-                    <div class="team-description">
-                        <p>Team description:</p>
-                    </div>
-                    <div class="desc-body-wrapper">
-                        <div class="desc-body">
-                            <p>The Wood Carving Automation team is focused on revolutionizing traditional wood carving
-                                methods
-                                by integrating modern automation technologies. Our goal is to create a smart,
-                                programmable system that can
-                                craft intricate designs on wood surfaces with precision and efficiency. By leveraging
-                                robotic arms, CNC (Computer Numerical
-                                Control) systems, and advanced software algorithms, we aim to streamline the process of
-                                wood carving, making it more accessible
-                                and less labor-intensive for artisans and manufacturers alike. This project will explore
-                                various automation techniques while
-                                maintaining the authenticity of handcrafted designs, offering a perfect blend of
-                                artistry and technology. We're looking for
-                                innovative thinkers and engineers who can push the boundaries of traditional
-                                craftsmanship through cutting-edge automation
-                                solutions.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="team-static">
-                    <div class="members">
-                        <div class="wrap">
-                            <p>Team members:</p>
-                        </div>
-                        <div class="container">
-                            <p>Jimmy</p>
-                            <p>Timmy</p>
-                            <p>Kinny</p>
-                        </div>
-                    </div>
-                    <div class="requirements">
-                        <div class="wrap">
-                            <p>Requirements to join:</p>
-                        </div>
-                        <div class="container">
-                            <p>None Listed/</p>
-                        </div>
-                    </div>
-                    <div class="tags">
-                        <div class="wrap">
-                            <p>Tags:</p>
-                        </div>
-                        <div class="container">
-                            <p>Wood, automation, woodworking.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="button-wrapper">
-                    <button>Request to join</button>
-                </div>
-            </div>
-        </section>
-
-
     </main>
+
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 
