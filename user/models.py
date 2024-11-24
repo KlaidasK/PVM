@@ -11,7 +11,7 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=20)
     gender = models.CharField(max_length=10)
     language = models.CharField(max_length=20)
-    dob = models.DateField()
+    dob = models.DateField(null=True, blank=True)
     bio = models.CharField(max_length=500)
     
     def __str__(self):
