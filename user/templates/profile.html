@@ -15,7 +15,12 @@
     <!-- User Form (for username, email, etc.) -->
     <div class="user-form">
         <h3>Account Information</h3>
-        {{ user_form.as_p }} <!-- Render the user form fields -->
+        <label for="id_username">Username:</label>
+        {{ user_form.username }}
+        <br>
+        <label for="id_email">Email address:</label>
+        {{ user_form.email }}
+        <br>
     </div>
 
     <!-- Profile Form (for bio, profile picture, etc.) -->
@@ -29,7 +34,7 @@
 </form>
 
 <!-- Delete Profile Button -->
-<form action="{% url 'user:delete_profile' %}" method="post" style="margin-top: 20px;">
+<form method="post" style="margin-top: 20px;">
     {% csrf_token %}
     <input type="hidden" name="form_type" value="delete_profile">
     <button type="submit" class="delete-button" style="color: red;">Delete Profile</button>

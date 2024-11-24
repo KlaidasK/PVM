@@ -7,6 +7,10 @@ class UserForm(forms.ModelForm):
         model = User;
         fields = ['username', 'email']
         
+        def __init__(self, *args, **kwargs):
+            super(UserForm, self).__init__(*args, **kwargs)
+            self.fields['username'].help_text = None  # Remove the default help text
+        
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
