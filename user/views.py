@@ -41,13 +41,8 @@ def profile_view(request):
     profile_form = ProfileForm(instance=profile)
 
     if request.method == 'POST':
-        # Check if the profile picture is being updated
-        if 'profile_picture' in request.FILES:
-            profile.profile_picture = request.FILES['profile_picture']
-            profile.save()
-            return redirect('user:profile')
-
         form_type = request.POST.get('form_type')
+
         if form_type == 'edit_profile':
             user_form = UserForm(request.POST, instance=request.user)
             profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
@@ -60,6 +55,12 @@ def profile_view(request):
         elif form_type == 'delete_profile':
             request.user.delete()
             return redirect('frontend:index')
+
+        # Handle profile picture update
+        if 'profile_picture' in request.FILES:
+            profile.profile_picture = request.FILES['profile_picture']
+            profile.save()
+            return redirect('user:profile')
 
     return render(request, 'profile.html', {
         'user_form': user_form,

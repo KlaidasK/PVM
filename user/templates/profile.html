@@ -1,112 +1,127 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
-<link rel="stylesheet" href="{% static 'css/global.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+</head>
+<body>
+    {% include 'include/navbar.html' %}
 
-{% include 'include/navbar.html' %}
+    {% block content %}
+    <form id="profile-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" id="form-type-input" name="form_type" value="edit_profile">
 
-{% block content %}
-<form id="profile-form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input type="hidden" name="form_type" value="edit_profile">
+        <div class="form-wrapper">
+            <div class="profile-section">
+                <div class="profile-picture-container">
+                    <h3>Profile Picture</h3>
+                    {% if profile_form.instance.profile_picture %}
+                        <img id="profile-picture" src="{{ profile_form.instance.profile_picture.url }}" 
+                             alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+                    {% else %}
+                        <img id="profile-picture" src="{% static 'images/default.jpg' %}" 
+                             alt="Default Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+                    {% endif %}
 
-    <div class="form-wrapper">
-        <div class="profile-section">
-          <div class="profile-picture-container">
-            <h3>Profile Picture</h3>
-            {% if profile_form.instance.profile_picture %}
-                <img id="profile-picture" src="{{ profile_form.instance.profile_picture.url }}" 
-                     alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
-            {% else %}
-                <img id="profile-picture" src="{% static 'images/default.jpg' %}" 
-                     alt="Default Picture" style="width: 150px; height: 150px; border-radius: 50%;">
-            {% endif %}
-            
-            <!-- Edit Button -->
-            <button type="button" id="edit-picture-button" class="edit-button">Edit</button>
-            
-            <!-- Hidden File Input -->
-            <input type="file" id="file-input" name="profile_picture" accept="image/*" style="display: none;">
-          </div>
+                    <!-- Edit Button -->
+                    <button type="button" id="edit-picture-button" class="edit-button">Edit</button>
 
-          <article>
-              <h3>About this user:</h3>
-              <section class="bio">
-                  <p>{{ profile_form.bio.value|default:"No bio available" }}</p>
-              </section>
-              <section>
-                  <h4>Badges</h4>
-                  <span>1 2 3 4 5</span>
-              </section>
-          </article>
+                    <!-- Hidden File Input -->
+                    <input type="file" id="file-input" name="profile_picture" accept="image/*" style="display: none;">
+                </div>
+
+                <article>
+                    <h3>About this user:</h3>
+                    <section class="bio">
+                        <p>{{ profile_form.bio.value|default:"No bio available" }}</p>
+                    </section>
+                    <section>
+                        <h4>Badges</h4>
+                        <span>1 2 3 4 5</span>
+                    </section>
+                </article>
+            </div>
+            <div class="form-fields">
+                <div>
+                    <label for="id_username">Username</label>
+                    {{ user_form.username }}
+                </div>
+                <div>
+                    <label for="id_email">Email</label>
+                    {{ user_form.email }}
+                </div>
+                <div>
+                    <label for="id_first_name">First Name</label>
+                    <input id="id_first_name" type="text" name="first_name" value="{{ profile_form.instance.first_name }}">
+                </div>
+                <div>
+                    <label for="id_last_name">Last Name</label>
+                    <input id="id_last_name" type="text" name="last_name" value="{{ profile_form.instance.last_name }}">
+                </div>
+                <div>
+                    <label for="id_phone">Phone</label>
+                    <input id="id_phone" type="text" name="phone" value="{{ profile_form.instance.phone }}">
+                </div>
+                <div>
+                    <label for="id_address">Address</label>
+                    <input id="id_address" type="text" name="address" value="{{ profile_form.instance.address }}">
+                </div>
+                <div>
+                    <label for="id_country">Country</label>
+                    <input id="id_country" type="text" name="country" value="{{ profile_form.instance.country }}">
+                </div>
+                <div>
+                    <label for="id_gender">Gender</label>
+                    <select id="id_gender" name="gender">
+                        <option value="Male" {% if profile_form.instance.gender == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if profile_form.instance.gender == 'Female' %}selected{% endif %}>Female</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="id_language">Language</label>
+                    <input id="id_language" type="text" name="language" value="{{ profile_form.instance.language }}">
+                </div>
+                <div>
+                    <label for="id_dob">Date of Birth</label>
+                    <input id="id_dob" type="date" name="dob" value="{{ profile_form.instance.dob|date:"Y-m-d" }}">
+                </div>
+                <div>
+                    <label for="id_bio">Bio</label>
+                    {{ profile_form.bio }}
+                </div>
+                <button type="submit">Save Changes</button>
+                <!-- Delete profile button -->
+                <button type="button" id="delete-profile-button" class="delete-button" style="color: red;">Delete Profile</button>
+            </div>
         </div>
-        <div class="form-fields">
-            <div>
-                <label for="id_username">Username</label>
-                {{ user_form.username }}
-            </div>
-            <div>
-                <label for="id_email">Email</label>
-                {{ user_form.email }}
-            </div>
-            <div>
-                <label for="id_first_name">First Name</label>
-                <input id="id_first_name" type="text" name="first_name" value="{{ profile_form.instance.first_name }}">
-            </div>
-            <div>
-                <label for="id_last_name">Last Name</label>
-                <input id="id_last_name" type="text" name="last_name" value="{{ profile_form.instance.last_name }}">
-            </div>
-            <div>
-                <label for="id_phone">Phone</label>
-                <input id="id_phone" type="text" name="phone" value="{{ profile_form.instance.phone }}">
-            </div>
-            <div>
-                <label for="id_address">Address</label>
-                <input id="id_address" type="text" name="address" value="{{ profile_form.instance.address }}">
-            </div>
-            <div>
-                <label for="id_country">Country</label>
-                <input id="id_country" type="text" name="country" value="{{ profile_form.instance.country }}">
-            </div>
-            <div>
-                <label for="id_gender">Gender</label>
-                <select id="id_gender" name="gender">
-                    <option value="Male" {% if profile_form.instance.gender == 'Male' %}selected{% endif %}>Male</option>
-                    <option value="Female" {% if profile_form.instance.gender == 'Female' %}selected{% endif %}>Female</option>
-                </select>
-            </div>
-            <div>
-                <label for="id_language">Language</label>
-                <input id="id_language" type="text" name="language" value="{{ profile_form.instance.language }}">
-            </div>
-            <div>
-                <label for="id_dob">Date of Birth</label>
-                <input id="id_dob" type="date" name="dob" value="{{ profile_form.instance.dob|date:"Y-m-d" }}">
-            </div>
-            <div>
-                <label for="id_bio">Bio</label>
-                {{ profile_form.bio }}
-            </div>
-            <button type="submit">Save Changes</button>
-        </div>
-    </div>
-</form>
+    </form>
 
-<form method="post" style="margin-top: 20px;">
-    {% csrf_token %}
-    <input type="hidden" name="form_type" value="delete_profile">
-    <button type="submit" class="delete-button" style="color: red;">Delete Profile</button>
-</form>
+    <script>
+        // Handle the delete profile button
+        document.getElementById('delete-profile-button').addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent default behavior
+            if (confirm("Are you sure you want to delete your profile?")) {
+                console.log("Delete confirmed"); // Debugging
+                document.getElementById('form-type-input').value = 'delete_profile'; // Change form_type
+                document.getElementById('profile-form').submit(); // Submit the form
+            }
+        });
 
-<script>
-  document.getElementById('edit-picture-button').addEventListener('click', function () {
-      // Simulate a click on the hidden file input
-      document.getElementById('file-input').click();
-  });
+        // Handle profile picture edit button
+        document.getElementById('edit-picture-button').addEventListener('click', function () {
+            document.getElementById('file-input').click();
+        });
 
-  document.getElementById('file-input').addEventListener('change', function () {
-      // Automatically submit the form when a file is selected
-      document.getElementById('profile-form').submit();
-  });
-</script>
-{% endblock %}
+        // Submit the form when a new profile picture is selected
+        document.getElementById('file-input').addEventListener('change', function () {
+            document.getElementById('profile-form').submit();
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>
