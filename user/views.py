@@ -35,32 +35,33 @@ def logout_view(request):
         
 @login_required(login_url="/user/login/")
 def profile_view(request):
-    # Get or create the user profile
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
-    # Initialize forms with existing data (for GET or invalid POST requests)
     user_form = UserForm(instance=request.user)
     profile_form = ProfileForm(instance=profile)
 
     if request.method == 'POST':
-        form_type = request.POST.get('form_type')
+        # Check if the profile picture is being updated
+        if 'profile_picture' in request.FILES:
+            profile.profile_picture = request.FILES['profile_picture']
+            profile.save()
+            return redirect('user:profile')
 
+        form_type = request.POST.get('form_type')
         if form_type == 'edit_profile':
-            # Bind the forms with POST data
             user_form = UserForm(request.POST, instance=request.user)
             profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
 
             if user_form.is_valid() and profile_form.is_valid():
-                user_form.save()  # Save the user data (username, email, etc.)
-                profile_form.save()  # Save the profile data (bio, profile picture)
-                return redirect('user:profile')  # Redirect to the profile page after saving
+                user_form.save()
+                profile_form.save()
+                return redirect('user:profile')
 
         elif form_type == 'delete_profile':
-            # Delete the user account
             request.user.delete()
-            return redirect('frontend:index')  # Redirect to the homepage after deletion
+            return redirect('frontend:index')
 
-    # Render the profile page with the forms
-    return render(request, 'profile.html', {'user_form': user_form, 'profile_form': profile_form})
-
-
+    return render(request, 'profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
+    })

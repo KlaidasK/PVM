@@ -14,7 +14,11 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['bio']
+        fields = [
+            'first_name', 'last_name', 'phone', 'address', 
+            'country', 'gender', 'language', 'dob', 'bio'
+        ]
         widgets = {
             'bio': forms.Textarea(attrs={'rows': 4, 'placeholder': 'Tell us about yourself...'}),
+            'dob': forms.DateInput(attrs={'type': 'date'}),
         }

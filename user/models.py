@@ -13,6 +13,7 @@ class UserProfile(models.Model):
     language = models.CharField(max_length=20)
     dob = models.DateField(null=True, blank=True)
     bio = models.CharField(max_length=500)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', default='profile_pictures/default.jpg', blank=True)
     
     def __str__(self):
         return f"{self.user_profile}"
