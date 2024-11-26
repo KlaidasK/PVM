@@ -4,12 +4,23 @@ from django.contrib import messages
 from .forms import TeamForm  # Importing the TeamForm class from the forms file
 from .models import Team  # Ensure you have the correct import for your Team model
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # View to search for teams (empty placeholder for now)
+# Create your views here.
 def teamsearch(request):
- # Fetch all teams from the database
-    teams = Team.objects.all()  # Get all teams
-    return render(request, 'teamsearch.html', {'teams': teams})
+    # Get the search query from the request
+    search_query = request.GET.get('search', '')
+    
+    # Query the teams, filtering by name if a search query is provided
+    teams = Team.objects.all()
+    
+    teams = teams.filter(
+            Q(name__icontains=search_query) | Q(keyword__icontains=search_query)  # Case-insensitive search by name or keyword
+        )
+
+    # Pass the filtered teams to the template
+    return render(request, 'teamsearch.html', {'teams': teams, 'search_query': search_query})
 
 @login_required
 def teammanage(request):
