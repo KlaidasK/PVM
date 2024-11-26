@@ -28,7 +28,9 @@
    
             <div style="display: flex; align-items: center; gap: 20px;">
                 <h1 style="color: white; margin-top: 50px;">Create your team</h1>
-                <button style="margin-top: 50px;"><a href="{% url 'teams:create-team' %}" class="btn">+</a></button>
+                <button style="margin-top: 50px;" onclick="window.location.href='{% url 'teams:create-team' %}'">
+                    +
+                  </button>                  
             </div>
             
             <h1 style="color: white; margin-top: 50px;">Your teams</h1>
