@@ -18,23 +18,25 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/view.css' %}">
-
+    
 </head>
 
 <body>
     {% include 'include/navbar.html' %}
     <main>
         <div class="search-container">
-            <form onsubmit="performSearch(event)" autocomplete="off">
-                <input type="text" placeholder="Search.." name="search">
-                <button type="submit"><i class="fa fa-search"></i></button>
-                <input type="checkbox" name="filter">
-                <label for="filter" class="filter">Filter by team activity</label>
-            </form>
-
-            <button><a href="{% url 'teams:create-team' %}" class="btn">+</a></button>
-
+   
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <h1 style="color: white; margin-top: 50px;">Create your team</h1>
+                <button style="margin-top: 50px;" onclick="window.location.href='{% url 'teams:create-team' %}'">
+                    +
+                  </button>                  
+            </div>
+            
+            <h1 style="color: white; margin-top: 50px;">Your teams</h1>
         </div>
+
+        
         <section class="presearch">
             
         </section>
