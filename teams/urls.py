@@ -8,4 +8,6 @@ urlpatterns = [
     path("teamsearch/", views.teamsearch, name="teamsearch"),
     path("teammanage/", views.teammanage, name='teammanage'),
     path('teamcreate/', views.teamcreate, name='create-team'),
+    path('detail/<int:team_id>/', views.teamdetail, name='teamdetail'), 
+    path('delete_team/<int:team_id>/', views.delete_team, name='delete_team'),
 ]

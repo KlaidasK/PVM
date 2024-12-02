@@ -76,7 +76,9 @@
                                 <p>{{ team.keyword }}</p> <!-- Display team keyword as the tag -->
                             </div>
                             <div class="button-wrapper">
-                                <button>Check my team</button>
+                                <a href="{% url 'teams:teamdetail' team.id %}">
+                                    <button>Check my team</button>
+                                </a>
                             </div>
                         </div>
                     </div>
