@@ -81,3 +81,14 @@ def profile_view(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+from django.shortcuts import render
+from .models import UserProfile
+
+def usersearch(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        users = UserProfile.objects.filter(user__username__icontains=search_query)
+    else:
+        users = UserProfile.objects.all()
+    return render(request, 'usersearch.html', {'users': users, 'search_query': search_query})

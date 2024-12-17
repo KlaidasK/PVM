@@ -20,52 +20,47 @@
         <div class="search-container">
             <form method="get" autocomplete="off">
                 <!-- The value for the input field should be the current search query -->
-                <input type="text" placeholder="Search.." name="search" value="{{ search_query }}">
+                <input type="text" placeholder="Search users.." name="search" value="{{ search_query }}">
                 <button type="submit"><i class="fa fa-search"></i></button>
-                <input type="checkbox" name="filter" id="filter">
-                <label for="filter" class="filter">Filter by team activity</label>
             </form>
         </div>
 
         <section class="presearch">
-            <div class="teams-container">
+            <div class="users-container">
                 <div class="head">
-                    <p>Recommended Teams:</p>
+                    <p>Recommended Users:</p>
                 </div>
                 <div class="carousel">
-                    {% for team in teams %}
+                    {% for user_profile in users %}
                     <div class="card">
                         <div class="card-header">
-                            <p>Looking for: {{ team.looking_for|default:"Not specified" }}</p>
-                            <p class="title"><span>{{ team.name }}</span></p>
+                            <p>Username: {{ user_profile.user.username }}</p>
+                            <p class="title"><span>{{ user_profile.first_name }} {{ user_profile.last_name }}</span></p>
                         </div>
                         <div class="card-content">
                             <div class="activity-dots">
-                                {% for _ in team.members.all %}
-                                    <span></span>
-                                {% endfor %}
+                                <!-- You can add user activity dots or other indicators here -->
                             </div>
                             <div class="arrow">&gt;</div>
                         </div>
                         <div class="card-footer">
                             <div class="description">
-                                <p>Description:</p>
-                                <p>{{ team.description }}</p>
-                            </div>
-                            <div class="requirements">
-                                <p>Requirements to join:</p>
-                                <p>{{ team.requirements|default:"None Listed" }}</p>
+                                <p>Email:</p>
+                                <p>{{ user_profile.user.email }}</p>
                             </div>
                             <div class="tags">
-                                <p>Keyword:</p>
-                                <p>{{ team.keyword }}</p>
+                                <p>Joined:</p>
+                                <p>{{ user_profile.user.date_joined }}</p>
                             </div>
-                            </form>
-
+                            <div class="button-wrapper">
+                                <a href="{% url 'teams:send_invite' team.id user_profile.user.id %}">
+                                    <button>Send Invite</button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     {% empty %}
-                        <p>No teams found for "{{ search_query }}"</p>
+                        <p>No users found for "{{ search_query }}"</p>
                     {% endfor %}
                 </div>
             </div>

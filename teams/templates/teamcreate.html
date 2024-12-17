@@ -26,17 +26,6 @@
     <main>
        <div class="create-team-container">
     <h1>Create a New Team</h1>
-
-    {% if messages %}
-        <div class="messages">
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
     <form method="post" class="create-team-form">
         {% csrf_token %}
         <div class="form-group">
