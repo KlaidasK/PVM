@@ -117,12 +117,6 @@ def join_team(request, team_id):
     return redirect('teams:teamdetail', team_id=team.id)
 
 @login_required
-def send_invite(request, team_id, user_id):
-    team = get_object_or_404(Team, id=team_id)
-    invited_user = get_object_or_404(User, id=user_id)
-    TeamInvite.send_invite(team, invited_user, request.user)
-    return redirect('teams:teamdetail', team_id=team.id)
-
 def usersearch(request, team_id):
     search_query = request.GET.get('search', '')
     if search_query:

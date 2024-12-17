@@ -38,9 +38,6 @@
                             <p class="title"><span>{{ user_profile.first_name }} {{ user_profile.last_name }}</span></p>
                         </div>
                         <div class="card-content">
-                            <div class="activity-dots">
-                                <!-- You can add user activity dots or other indicators here -->
-                            </div>
                             <div class="arrow">&gt;</div>
                         </div>
                         <div class="card-footer">
@@ -53,9 +50,6 @@
                                 <p>{{ user_profile.user.date_joined }}</p>
                             </div>
                             <div class="button-wrapper">
-                                <a href="{% url 'teams:send_invite' team.id user_profile.user.id %}">
-                                    <button>Send Invite</button>
-                                </a>
                             </div>
                         </div>
                     </div>
