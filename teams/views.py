@@ -118,10 +118,16 @@ def join_team(request, team_id):
 
 @login_required
 def usersearch(request, team_id):
-    search_query = request.GET.get('search', '')
+    search_query = request.GET.get('search', '')  # Get the search query
+    
+    # Search logic
     if search_query:
         users = User.objects.filter(user__username__icontains=search_query)
     else:
         users = User.objects.all()
-    team = get_object_or_404(Team, id=team_id)
-    return render(request, 'usersearch.html', {'users': users, 'search_query': search_query, 'team': team})
+    
+    return render(request, 'usersearch.html', {
+        'users': users,               # List of filtered users
+        'search_query': search_query, # Search input value
+        'username': request.user.username  # Pass the logged-in user's username
+    })

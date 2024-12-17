@@ -86,9 +86,16 @@ from django.shortcuts import render
 from .models import UserProfile
 
 def usersearch(request):
-    search_query = request.GET.get('search', '')
+    search_query = request.GET.get('search', '')  # Get the search query
+    
+    # Search logic
     if search_query:
         users = UserProfile.objects.filter(user__username__icontains=search_query)
     else:
         users = UserProfile.objects.all()
-    return render(request, 'usersearch.html', {'users': users, 'search_query': search_query})
+    
+    return render(request, 'usersearch.html', {
+        'users': users,               # List of filtered users
+        'search_query': search_query, # Search input value
+        'username': request.user.username  # Pass the logged-in user's username
+    })
