@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import TeamForm  # Import the TeamForm class from the forms file
-from .models import Team  # Import the Team model
+from .models import Team, TeamInvite  # Import the Team model
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -110,3 +110,24 @@ def remove_member(request, team_id, user_id):
     team.remove_member(user)  # Remove the user from the team's members
     return redirect('teams:team_view', team_id=team.id)
 
+@login_required
+def join_team(request, team_id):
+    team = get_object_or_404(Team, id=team_id)
+    team.add_member(request.user)
+    return redirect('teams:teamdetail', team_id=team.id)
+
+@login_required
+def usersearch(request, team_id):
+    search_query = request.GET.get('search', '')  # Get the search query
+    
+    # Search logic
+    if search_query:
+        users = User.objects.filter(user__username__icontains=search_query)
+    else:
+        users = User.objects.all()
+    
+    return render(request, 'usersearch.html', {
+        'users': users,               # List of filtered users
+        'search_query': search_query, # Search input value
+        'username': request.user.username  # Pass the logged-in user's username
+    })
