@@ -18,15 +18,27 @@ def register_view(request):
         form = UserCreationForm()
     return render(request, "register.html", { "form": form })
 
+def custom_admin_view(request):
+    return render(request, "admin.html")
+
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data = request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            return redirect("frontend:index")
+            user = form.get_user()
+            login(request, user)  # Log in the user
+            
+            # Check if the user is a superuser (admin)
+            if user.is_superuser:  # Admin user
+                return redirect('user:custom_admin')  # Redirect to custom admin page
+            
+            # Regular user redirect
+            return redirect('frontend:index')  # Default user page
     else:
         form = AuthenticationForm()
-    return render(request, "login.html", { "form": form })
+    
+    return render(request, "login.html", {"form": form})
+
 
 def logout_view(request):
     if request.method=="POST":
