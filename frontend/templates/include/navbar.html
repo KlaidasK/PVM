@@ -1,20 +1,29 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/global.css' %}">
 <nav>
+    <div>
+        <a href="{% url 'frontend:index' %}">makePro</a>
+    </div>
+    
     {% if user.is_authenticated %}
-    <div><a href="{% url 'frontend:index' %}">makePro</a></div>
+    <!-- Menu for Logged-in Users -->
     <ul>
         <li class='logout'>
             <form action="{% url 'user:logout' %}" method="post">
-              {% csrf_token %}
-              <button>Logout</button>
+                {% csrf_token %}
+                <button>Logout</button>
             </form>
         </li>
         <li><a href="{% url 'user:profile' %}">Profile</a></li>
         <li><a href="{% url 'teams:teamsearch' %}">Search for team</a></li>
         <li><a href="{% url 'teams:teammanage' %}">Manage teams</a></li>
-        
+
+        {% if user.is_superuser %}
+        <!-- Admin-specific links -->
+        <li><a href="{% url 'user:badge-manage' %}">Manage badges</a></li>
+        {% endif %}
     </ul>
     {% else %}
-    <div><a href="{% url 'frontend:index' %}">makePro</a></div>
     <ul>
         <li class="login"><a href="{% url 'user:login' %}">Login</a></li>
         <li><a href="{% url 'user:register' %}">Register</a></li>

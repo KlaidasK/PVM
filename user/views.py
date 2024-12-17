@@ -18,15 +18,30 @@ def register_view(request):
         form = UserCreationForm()
     return render(request, "register.html", { "form": form })
 
+def custom_admin_view(request):
+    return render(request, "admin.html")
+
 def login_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(data = request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            login(request, form.get_user())
-            return redirect("frontend:index")
+            user = form.get_user()
+            login(request, user)  # Log in the user
+            
+            # Check if the user is a superuser (admin)
+            if user.is_superuser:  # Admin user
+                return redirect('user:custom_admin')  # Redirect to custom admin page
+            
+            # Regular user redirect
+            return redirect('frontend:index')  # Default user page
     else:
         form = AuthenticationForm()
-    return render(request, "login.html", { "form": form })
+    
+    return render(request, "login.html", {"form": form})
+
+def badge_manage(request):
+    return render(request, "badge-manage.html")
+
 
 def logout_view(request):
     if request.method=="POST":
@@ -65,4 +80,22 @@ def profile_view(request):
     return render(request, 'profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
+    })
+
+from django.shortcuts import render
+from .models import UserProfile
+
+def usersearch(request):
+    search_query = request.GET.get('search', '')  # Get the search query
+    
+    # Search logic
+    if search_query:
+        users = UserProfile.objects.filter(user__username__icontains=search_query)
+    else:
+        users = UserProfile.objects.all()
+    
+    return render(request, 'usersearch.html', {
+        'users': users,               # List of filtered users
+        'search_query': search_query, # Search input value
+        'username': request.user.username  # Pass the logged-in user's username
     })
