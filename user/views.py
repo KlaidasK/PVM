@@ -39,6 +39,9 @@ def login_view(request):
     
     return render(request, "login.html", {"form": form})
 
+def badge_manage(request):
+    return render(request, "badge-manage.html")
+
 
 def logout_view(request):
     if request.method=="POST":

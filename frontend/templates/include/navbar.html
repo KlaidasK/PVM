@@ -20,7 +20,7 @@
 
         {% if user.is_superuser %}
         <!-- Admin-specific links -->
-        <li><a href=""></a></li>
+        <li><a href="{% url 'user:badge-manage' %}">Manage badges</a></li>
         {% endif %}
     </ul>
     {% else %}

@@ -10,4 +10,5 @@ urlpatterns = [
     path("logout/", views.logout_view, name="logout"),
     path("profile/", views.profile_view, name="profile"),
     path('custom-admin/', views.custom_admin_view, name='custom_admin'),
+    path("badge-manage/", views.badge_manage, name="badge-manage")
 ]
