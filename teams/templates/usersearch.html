@@ -35,7 +35,8 @@
                     <div class="card">
                         <div class="card-header">
                             <p>Username: {{ user_profile.username }}</p>
-                            <p class="title"><span>{{ user_profile.first_name }} {{ user_profile.last_name }}</span></p>
+                            <p class="title"><span>{{ user_profile.userprofile.first_name }} {{ user_profile.userprofile.last_name }}</span></p>
+                            <p class="title"><span>{{ user_profile.userprofile.bio }}</span></p>
                         </div>
                         <div class="card-content">
                             <div class="arrow">&gt;</div>
@@ -60,12 +61,6 @@
             </div>
         </section>
 
-        <section class="postsearch hidden">
-            <div class="results-container">
-                <!-- Additional search results will be displayed here -->
-            </div>
-        </section>
-    </main>
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>

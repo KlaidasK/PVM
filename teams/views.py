@@ -118,16 +118,22 @@ def join_team(request, team_id):
 
 @login_required
 def usersearch(request, team_id):
-    search_query = request.GET.get('search', '')  # Get the search query
+    search_query = request.GET.get('search', '')  # Get search query from the input
     
-    # Search logic
+    # Filter users based on the search query and prefetch related UserProfile data
     if search_query:
-        users = User.objects.filter(user__username__icontains=search_query)
+        users = User.objects.filter(
+            Q(username__icontains=search_query) |
+            Q(first_name__icontains=search_query) |
+            Q(last_name__icontains=search_query) |
+            Q(userprofile__bio__icontains=search_query)  # Search bio in related UserProfile
+        ).exclude(id=request.user.id).select_related('userprofile')  # Fetch related UserProfile
     else:
-        users = User.objects.all()
-    
+        users = User.objects.all().exclude(id=request.user.id).select_related('userprofile')
+
+    # Pass the users and search query to the template
     return render(request, 'usersearch.html', {
-        'users': users,               # List of filtered users
-        'search_query': search_query, # Search input value
-        'username': request.user.username  # Pass the logged-in user's username
+        'users': users,  # QuerySet of filtered users
+        'search_query': search_query,  # Search input value
+        'username': request.user.username  # Logged-in user's username
     })
