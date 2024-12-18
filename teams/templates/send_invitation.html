@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite User</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" href="{% static 'css/teams.css' %}">
+    <link rel="stylesheet" href="{% static 'css/view.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    {% include 'include/navbar.html' %}
+
+    <div class="container">
+        <!-- Page Heading -->
+        <h1 style="color: white; margin-top: 30px;">Invite User to Team: {{ team.name }}</h1>
+
+        <!-- Invitation Form -->
+        <form method="POST" style="color: white; margin-top: 20px;">
+            {% csrf_token %}
+            <label for="username" style="font-size: 1.2em;">Enter Username:</label>
+            <input type="text" name="username" id="username" placeholder="Username" required
+                style="padding: 8px; width: 100%; max-width: 400px; margin-top: 10px; margin-bottom: 20px;">
+
+            <br>
+            <button type="submit" style="
+                background-color: green; 
+                color: white; 
+                border: none; 
+                padding: 10px 20px; 
+                font-size: 1em;
+                cursor: pointer;
+                border-radius: 5px;">
+                Send Invitation
+            </button>
+        </form>
+
+        <!-- Back Button -->
+        <a href="{% url 'teams:teammanage' %}" style="
+            display: inline-block; 
+            margin-top: 20px; 
+            color: white; 
+            text-decoration: none; 
+            background-color: gray; 
+            padding: 10px 20px; 
+            border-radius: 5px;">
+            Back to Team Management
+        </a>
+
+        <!-- Messages -->
+        {% if messages %}
+            <ul style="margin-top: 20px; color: white;">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

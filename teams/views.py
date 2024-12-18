@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import TeamForm  # Import the TeamForm class from the forms file
-from .models import Team, TeamInvite  # Import the Team model
+from .models import Team, TeamInvite, TeamInvitation  # Import the Team model
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -118,22 +118,64 @@ def join_team(request, team_id):
 
 @login_required
 def usersearch(request, team_id):
-    search_query = request.GET.get('search', '')  # Get search query from the input
-    
-    # Filter users based on the search query and prefetch related UserProfile data
+    search_query = request.GET.get('search', '')
+
     if search_query:
         users = User.objects.filter(
             Q(username__icontains=search_query) |
             Q(first_name__icontains=search_query) |
             Q(last_name__icontains=search_query) |
-            Q(userprofile__bio__icontains=search_query)  # Search bio in related UserProfile
-        ).exclude(id=request.user.id).select_related('userprofile')  # Fetch related UserProfile
+            Q(userprofile__bio__icontains=search_query)
+        ).exclude(id=request.user.id).select_related('userprofile')
     else:
         users = User.objects.all().exclude(id=request.user.id).select_related('userprofile')
 
-    # Pass the users and search query to the template
+    team = get_object_or_404(Team, id=team_id)
+
     return render(request, 'usersearch.html', {
-        'users': users,  # QuerySet of filtered users
-        'search_query': search_query,  # Search input value
-        'username': request.user.username  # Logged-in user's username
+        'users': users,
+        'search_query': search_query,
+        'team': team,
     })
+
+def send_invitation(request, team_id):
+    team = get_object_or_404(Team, id=team_id)
+
+    if team.team_leader != request.user:
+        messages.error(request, "Only the team leader can send invitations.", extra_tags="invitation")
+        return redirect("teams:usersearch", team_id=team_id)
+
+    if request.method == "POST":
+        username = request.POST.get("username")
+        invited_user = User.objects.filter(username=username).first()
+
+        if not invited_user:
+            messages.error(request, "User not found.", extra_tags="invitation")
+        elif TeamInvitation.objects.filter(team=team, invited_user=invited_user).exists():
+            messages.info(request, "Invitation already sent.", extra_tags="invitation")
+        else:
+            TeamInvitation.objects.create(team=team, invited_user=invited_user, invited_by=request.user)
+            messages.success(request, f"Invitation sent to {invited_user.username}.", extra_tags="invitation")
+
+        return redirect("teams:usersearch", team_id=team_id)
+
+    return render(request, "send_invitation.html", {"team": team})
+
+@login_required
+def view_invitations(request):
+    invitations = request.user.invitations_received.filter(accepted=False)
+    return render(request, "view_invitations.html", {"invitations": invitations})
+
+@login_required
+def accept_invitation(request, invitation_id):
+    invitation = get_object_or_404(TeamInvitation, id=invitation_id, invited_user=request.user)
+
+    if request.method == "POST":
+        invitation.accepted = True
+        invitation.save()
+        invitation.team.members.add(request.user)
+        messages.success(request, f"You have joined {invitation.team.name}.")
+        return redirect("teams:view_invitations")
+
+    return render(request, "confirm_accept_invitation.html", {"invitation": invitation})
+

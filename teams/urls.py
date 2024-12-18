@@ -12,4 +12,7 @@ urlpatterns = [
     path('delete_team/<int:team_id>/', views.delete_team, name='delete_team'),
     path('join_team/<int:team_id>/', views.join_team, name='join_team'),
     path('usersearch/<int:team_id>/', views.usersearch, name='usersearch'),
+    path("teams/<int:team_id>/invite/", views.send_invitation, name="send_invitation"),
+    path("invitations/", views.view_invitations, name="view_invitations"),
+    path("invitations/<int:invitation_id>/accept/", views.accept_invitation, name="accept_invitation"),
 ]

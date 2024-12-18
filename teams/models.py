@@ -68,6 +68,16 @@ class TeamInvite(models.Model):
         invite.status = 'PENDING'
         invite.save()
         return invite
+    
+class TeamInvitation(models.Model):
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="invitations")
+    invited_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="invitations_received")
+    invited_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="invitations_sent")
+    created_at = models.DateTimeField(auto_now_add=True)
+    accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Invitation to {self.invited_user} for {self.team}"    
 
 @receiver(pre_save, sender=TeamInvite)
 def check_if_expired(sender, instance, **kwargs):

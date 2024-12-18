@@ -16,10 +16,28 @@
 <body>
     {% include 'include/navbar.html' %}
 
+    {% if messages %}
+    <div class="messages-container" style="margin: 20px auto; width: 80%;">
+        {% for message in messages %}
+            {% if "invitation" in message.tags %}
+            <div style="padding: 10px; margin: 10px 0; border-radius: 5px; color: white;
+                {% if message.tags == 'success invitation' %}
+                    background-color: green;
+                {% elif message.tags == 'info invitation' %}
+                    background-color: blue;
+                {% elif message.tags == 'error invitation' %}
+                    background-color: red;
+                {% endif %}">
+                {{ message }}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
     <main>
         <div class="search-container">
             <form method="get" autocomplete="off">
-                <!-- The value for the input field should be the current search query -->
                 <input type="text" placeholder="Search users.." name="search" value="{{ search_query }}">
                 <button type="submit"><i class="fa fa-search"></i></button>
             </form>
@@ -35,32 +53,40 @@
                     <div class="card">
                         <div class="card-header">
                             <p>Username: {{ user_profile.username }}</p>
-                            <p class="title"><span>{{ user_profile.userprofile.first_name }} {{ user_profile.userprofile.last_name }}</span></p>
-                            <p class="title"><span>{{ user_profile.userprofile.bio }}</span></p>
-                        </div>
-                        <div class="card-content">
-                            <div class="arrow">&gt;</div>
+                            <p class="title">
+                                <span>{{ user_profile.userprofile.first_name }} {{ user_profile.userprofile.last_name }}</span>
+                            </p>
+                            <p class="title">
+                                <span>{{ user_profile.userprofile.bio }}</span>
+                            </p>
                         </div>
                         <div class="card-footer">
                             <div class="description">
                                 <p>Email:</p>
                                 <p>{{ user_profile.email }}</p>
                             </div>
-                            <div class="tags">
-                                <p>Send invite:</p>
-                                <p>{{ user_profile.date_joined }}</p>
-                            </div>
-                            <div class="button-wrapper">
-                            </div>
+                            <form method="POST" action="{% url 'teams:send_invitation' team_id=team.id %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="username" value="{{ user_profile.username }}">
+                                <button type="submit" style="
+                                    background-color: green; 
+                                    color: white; 
+                                    border: none; 
+                                    padding: 5px 10px; 
+                                    border-radius: 5px;
+                                    cursor: pointer;">
+                                    Send Invite
+                                </button>
+                            </form>
                         </div>
                     </div>
                     {% empty %}
-                        <p>No users found for "{{ search_query }}"</p>
+                    <p>No users found for "{{ search_query }}"</p>
                     {% endfor %}
                 </div>
             </div>
         </section>
-
+    </main>
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>
